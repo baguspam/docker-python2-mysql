@@ -1,0 +1,13 @@
+# This is a sample build configuration for Ruby.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Dockerhub as your build environment.
+image: mikemanger/python27-mysql
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - /etc/init.d/mysql start
+          - mysql -uroot -e 'create database python'
+          - python test.py

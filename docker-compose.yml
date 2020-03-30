@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  db:
+    image: mikemanger/python27-mysql
+    # command: cp data/demodata.sql demodata.sql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=mediprepare
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=root
+
+  web:
+    build: .
+    working_dir: /code
+    command: bash start.sh
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    links:
+      - db
+    depends_on:
+      - db
