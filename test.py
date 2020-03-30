@@ -21,12 +21,13 @@ def make_query(conn):
 
 class TestDatabaseConnection(unittest.TestCase):
     def test_pymysql(self):
-        conn = pymysql.connect('localhost', 'root')
+        conn = pymysql.connect('localhost', 'root', 'password')
         make_query(conn)
 
     def test_mysqlconn(self):
         conn = MySQLdb.connect(
             user='root',
+            password='password',
             host='localhost',
         )
         make_query(conn)
